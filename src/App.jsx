@@ -7,7 +7,7 @@ function App() {
     <>
       <div>
         <h1 className='title is-1 '>App</h1>
-        <Counter title={"Algo mas"} initialCounter ={ 0 } />
+        <Counter title={"Algo mas"} initialCounter = { 0 } />
       </div>
     </>
   )
