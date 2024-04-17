@@ -6,6 +6,7 @@ import { Register } from './pages/Register'
 import { Chat } from './pages/Chat'
 import { PrivateRouter } from './router/PrivateRouter'
 import { Prueba } from './pages/Prueba'
+import { AuthProvider } from './context/AuthProvider.jsx'
 
 import './App.scss'
 
@@ -14,14 +15,16 @@ function App() {
   return (
     <div className='App'>
       <Router>
-        <Routes>
-          <Route element={ <PrivateRouter/> } >
-            <Route path='/' element={ <Chat/> } exact />
-            <Route path='/prueba' element={ <Prueba/> } />
-          </Route>
-          <Route path='/login' element={ <Login/> } />
-          <Route path='/register' element={ <Register/> } />
-        </Routes>
+        <AuthProvider>
+          <Routes>
+            <Route element={ <PrivateRouter/> } >
+              <Route path='/' element={ <Chat/> } exact />
+              <Route path='/prueba' element={ <Prueba/> } />
+            </Route>
+            <Route path='/login' element={ <Login/> } />
+            <Route path='/register' element={ <Register/> } />
+          </Routes>
+        </AuthProvider>
       </Router>
     </div>
   )

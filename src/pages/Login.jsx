@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import '../styles/login.scss'
 import { AuthContext } from '../context/AuthContext';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 
 const loginData = {
   username: '',
@@ -9,7 +9,6 @@ const loginData = {
 }
 
 export const Login = () => {
-  const navigate = useNavigate();
   const { login } = useContext(AuthContext);
   const [formData, setFormData] = useState(loginData)
 
@@ -23,8 +22,7 @@ export const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    login();
-    navigate('/');
+    login(formData);
   }
 
   const isButtonDisabled = () =>{ return formData.username === '' || formData.password === '' }
