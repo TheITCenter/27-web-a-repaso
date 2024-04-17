@@ -1,47 +1,64 @@
-import { Link } from 'react-router-dom'
+import { useContext, useState } from 'react';
 import '../styles/login.scss'
-import { useState } from 'react'
+import { AuthContext } from '../context/AuthContext';
+import { Link, useNavigate } from 'react-router-dom';
 
 const loginData = {
-  username:'',
-  password:''
+  username: '',
+  password: ''
 }
 
 export const Login = () => {
-
+  const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
   const [formData, setFormData] = useState(loginData)
 
+  const onInputChange = ({ target }) => {
+    const { name, value } = target;
+    setFormData({
+        ...formData,
+        [ name ]: value
+    });
+}
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    login();
+    navigate('/');
+  }
+
+  const isButtonDisabled = () =>{ return formData.username === '' || formData.password === '' }
   return (
-    <form className="login-form">
-      <h2 className='title is-2 login-form__custom-title--blue'> Login </h2>
+    <form className="login-form" onSubmit={handleSubmit}>
+      <h1 className='title is-2 login-form__custom-title--blue'>Login</h1>
       <div className='fields'>
-        <input className='input mb-4' 
+        <input 
+          className="input fields__input-fields" 
           type="text" 
-          placeholder='User Name'
+          placeholder="username" 
           name="username"
           value={formData.username}
-          onChange={(event)=>{setFormData(
-            {...formData ,username: event.target.value}
-          )}}
+          onChange={onInputChange}
         />
         <input 
-          className='input mb-6' 
+          className="input fields__input-fields" 
           type="password" 
+          placeholder="password" 
           name="password"
           value={formData.password}
-          placeholder='Password'
-          onChange={(event)=>{setFormData(
-            {...formData ,password: event.target.value}
-          )}}
-          />
-        <button className='button is-info'> Login </button>
-
+          onChange={onInputChange}
+        />
+        <button 
+          className='button is-info' 
+          disabled={isButtonDisabled()}
+          type="submit"
+        >
+          Login
+        </button>
       </div>
-      <small className='is-align-self-flex-end'> 
-      Dont have an Account? <Link to='/register'> Register </Link>
+      <small className='is-align-self-flex-end'>
+          Dont have a account? <Link to="/register">Register</Link>
       </small>
-
     </form>
   )
 }
