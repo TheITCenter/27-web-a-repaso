@@ -7,11 +7,12 @@ import { Chat } from './pages/Chat'
 import { PrivateRouter } from './router/PrivateRouter'
 import { Prueba } from './pages/Prueba'
 
+import './App.scss'
+
 function App() {
 
   return (
-    <div>
-      <header> Header</header>
+    <div className='App'>
       <Router>
         <Routes>
           <Route element={ <PrivateRouter/> } >
@@ -22,7 +23,6 @@ function App() {
           <Route path='/register' element={ <Register/> } />
         </Routes>
       </Router>
-      <footer>Footer</footer>
     </div>
   )
 }
