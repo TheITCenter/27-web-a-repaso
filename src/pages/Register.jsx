@@ -7,12 +7,11 @@ const registerData = {
   password: '',
   name: '',
   email: ''
-
 }
 
 export const Register = () => {
 
-  const { onInputChange, onResetForm, username, password, name, email, isFormValid } = useForm(registerData)
+  const { onResetForm, onInputChange, username, password, name, email, isFormValid } = useForm(registerData)
 
   const navigate = useNavigate();
 

@@ -1,7 +1,8 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import '../styles/login.scss'
 import { AuthContext } from '../context/AuthContext';
 import { Link} from 'react-router-dom';
+import { useForm } from '../hooks/useForm';
 
 const loginData = {
   username: '',
@@ -10,22 +11,15 @@ const loginData = {
 
 export const Login = () => {
   const { login } = useContext(AuthContext);
-  const [formData, setFormData] = useState(loginData)
 
-  const onInputChange = ({ target }) => {
-    const { name, value } = target;
-    setFormData({
-        ...formData,
-        [ name ]: value
-    });
-}
+  const { onInputChange, username, password, isFormValid,formState } = useForm(loginData)
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    login(formData);
+    login(formState);
   }
 
-  const isButtonDisabled = () =>{ return formData.username === '' || formData.password === '' }
   return (
     <form className="login-form" onSubmit={handleSubmit}>
       <h1 className='title is-2 login-form__custom-title--blue'>Login</h1>
@@ -35,7 +29,7 @@ export const Login = () => {
           type="text" 
           placeholder="username" 
           name="username"
-          value={formData.username}
+          value={username}
           onChange={onInputChange}
         />
         <input 
@@ -43,12 +37,12 @@ export const Login = () => {
           type="password" 
           placeholder="password" 
           name="password"
-          value={formData.password}
+          value={password}
           onChange={onInputChange}
         />
         <button 
           className='button is-info' 
-          disabled={isButtonDisabled()}
+          disabled={!isFormValid}
           type="submit"
         >
           Login

@@ -19,10 +19,11 @@ function App() {
           <Routes>
             <Route element={ <PrivateRouter/> } >
               <Route path='/' element={ <Chat/> } exact />
-              <Route path='/prueba' element={ <Prueba/> } />
             </Route>
             <Route path='/login' element={ <Login/> } />
             <Route path='/register' element={ <Register/> } />
+            <Route path='/prueba/:pruebaId' element={ <Prueba/> } />
+            <Route path='*' element={ <h1>404</h1> } />
           </Routes>
         </AuthProvider>
       </Router>

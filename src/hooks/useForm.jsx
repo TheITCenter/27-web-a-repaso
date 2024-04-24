@@ -4,7 +4,6 @@ export const useForm = (initialForm = {}) => {
 
   const [ formState, setFormState ] = useState( initialForm );
 
-
   useEffect(() => {  
     setFormState(initialForm);
 }
@@ -13,8 +12,8 @@ export const useForm = (initialForm = {}) => {
 const onInputChange = ({ target }) => {
   const { name, value } = target;
   setFormState({
-      ...formState,
-      [ name ]: value
+    ...formState,
+    [ name ]: value
   });
 }
 
@@ -29,6 +28,7 @@ const isFormValid = useMemo(() => {
   return {
     onInputChange,
     onResetForm,
+    formState,
     ...formState,
     isFormValid
   }
